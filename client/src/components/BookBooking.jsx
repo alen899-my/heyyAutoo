@@ -52,7 +52,7 @@ const BookBooking = ({ setModalOpen, ele }) => {
     <>
       <div className="modal flex-center">
         <div className="modal__content">
-          <h2 className="page-heading">Book Booking</h2>
+          <h2 className="page-heading"> Booking</h2>
           <IoMdClose
             onClick={() => {
               setModalOpen(false);

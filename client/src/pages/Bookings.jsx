@@ -77,7 +77,7 @@ const Bookings = () => {
                   <tr>
                     <th>S.No</th>
                     <th>Driver</th>
-                    <th>Patient</th>
+                    <th>User</th>
                     <th>Booking Date</th>
                     <th>Booking Time</th>
                     <th>Booking Date</th>
