@@ -1,0 +1,15 @@
+@import url(app.css);
+
+.apply-driver-section {
+  margin: 0 auto;
+  width: 30%;
+}
+
+.apply-driver-container {
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+option {
+  text-transform: capitalize;
+}

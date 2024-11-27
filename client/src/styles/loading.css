@@ -1,0 +1,88 @@
+.loading-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+ 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.moving-car {
+  position: absolute;
+  width: 100%;
+  bottom: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.car-image {
+  width: 1000px; /* Increased size */
+  height: auto; /* Increased size */
+}
+
+.loading-dots {
+  position: absolute;
+  top: 40px;
+  font-size: 4rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.loading-dots span {
+  animation: blink 1.5s infinite;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@media (max-width: 768px) {
+  .car-image {
+    width: 200px; /* Scale down */
+  }
+
+  .loading-dots {
+    font-size: 1.5rem; /* Reduce text size */
+  }
+}
+
+/* For small screens (mobile) */
+@media (max-width: 480px) {
+  .car-image {
+    width: ; /* Further scale down for small devices */
+  }
+
+  .loading-dots {
+    font-size: 2rem; /* Smaller font for dots */
+  }
+
+ 
+}

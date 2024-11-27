@@ -1,0 +1,46 @@
+@import url(app.css);
+
+.contact-container {
+  flex-direction: column;
+  gap: 2rem;
+  width: 40%;
+}
+
+.apply-driver {
+  height: 90vh;
+}
+
+@media (max-width: 1000px) {
+  .contact-container {
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-container {
+    width: 60%;
+  }
+}
+
+@media (max-width: 420px) {
+  .contact-container {
+    width: 70%;
+  }
+}
+
+
+.register-section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+.contact-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  border-color: ;
+}

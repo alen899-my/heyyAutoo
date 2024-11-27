@@ -1,0 +1,144 @@
+@import url(app.css);
+
+.login-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, var(--light-blue), var(--bold-text-color));
+
+}
+
+.login-container {
+  flex-direction: column;
+  gap: 2rem;
+  width: 30%;
+  background-color: var(--white);
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: fit-content;
+}
+
+.form-heading {
+  font-size: 2rem;
+  color: black;
+}
+
+.register-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.login-container p{
+  color: black;
+}
+.login-container button{
+  color: black;
+}
+.login-container button:hover{
+  color: black;
+  background-color: rgb(231, 190, 56);
+}
+
+.form-input,
+textarea,
+select {
+  font-size: 1rem;
+  background-color: rgb(234, 234, 234);
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-family: var(--font-family);
+}
+
+.form-input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.login-link {
+  color: var(--darker-blue);
+}
+
+@media (max-width: 1184px) {
+  .login-container {
+    width: 30%;
+  }
+  .register-container {
+    width: 30%;
+  }
+}
+
+@media (max-width: 1120px) {
+  .login-container {
+    width: 35%;
+  }
+  .register-container {
+    width: 35%;
+  }
+}
+
+@media (max-width: 746px) {
+  .login-container {
+    width: 40%;
+  }
+  .register-container {
+    width: 40%;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    width: 60%;
+  }
+  .register-container {
+    width: 60%;
+  }
+}
+
+@media (max-width: 408px) {
+  .register-container {
+    width: 70%;
+  }
+  .login-container {
+    width: 70%;
+  }
+}
+
+.register-container {
+  flex-direction: column;
+  gap: 2rem;
+  width: 30%;
+  background-color: var(--white);
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: fit-content;
+}
+.register-container button{
+  background-color: var(--bold-text-color);
+  color: black;
+}
+.register-container button:hover{
+  background-color: rgb(216, 168, 12);
+  color: black;
+}
+.register-container p{
+  color: black;
+}
