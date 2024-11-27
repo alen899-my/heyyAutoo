@@ -55,7 +55,7 @@ const Footer = () => {
               </li>
               <li className="instagram">
                 <a
-                  href="https://www.instagram.com/"
+                  href="https://www.instagram.com/al.enn.n/"
                   target={"_blank"}
                   rel="noreferrer"
                 >

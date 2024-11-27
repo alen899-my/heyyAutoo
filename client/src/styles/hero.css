@@ -133,7 +133,7 @@
 @media (max-width: 480px) {
   .home-container {
     height: auto;
-    background-size: 100% auto; /* Full width on mobile */
+    background-size: 100% auto; 
     background-position: center bottom; /* Position image to keep auto and buildings in view */
   }
   .home-title {
