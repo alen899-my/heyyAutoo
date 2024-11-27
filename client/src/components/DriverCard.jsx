@@ -40,7 +40,7 @@ const DriverCard = ({ ele }) => {
         <strong>Charge per km: </strong> {ele?.Charge}
       </p>
       <p className="place" >
-        <strong>Place: </strong>
+        <strong>place: </strong>
         {ele?.place}
       </p>
       <p className="phone">

@@ -8,6 +8,9 @@ driverRouter.get("/getalldrivers", driverController.getalldrivers);
 
 driverRouter.get("/getnotdrivers", auth, driverController.getnotdrivers);
 
+driverRouter.get("/getdriversbyplace", driverController.getDriversByPlace);
+
+
 driverRouter.post("/applyfordriver", auth, driverController.applyfordriver);
 
 driverRouter.put("/deletedriver", auth, driverController.deletedriver);

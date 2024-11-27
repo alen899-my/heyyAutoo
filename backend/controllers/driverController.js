@@ -115,6 +115,29 @@ const deletedriver = async (req, res) => {
     res.status(500).send("Unable to delete driver");
   }
 };
+const getDriversByPlace = async (req, res) => {
+  const { from, to } = req.query;
+
+  if (!from || !to) {
+    return res.status(400).send("Both 'from' and 'to' fields are required.");
+  }
+
+  try {
+    // Adjust the filtering logic to match your Driver schema
+    const drivers = await Driver.find({
+      place: { $regex: new RegExp(`^${from}`, "i") }, // Matches places starting with 'from'
+    }).populate("userId");
+
+    if (!drivers.length) {
+      return res.status(404).send("No drivers found for the specified place.");
+    }
+
+    res.status(200).send(drivers);
+  } catch (error) {
+    console.error("Error fetching drivers:", error);
+    res.status(500).send("Server error occurred.");
+  }
+};
 
 module.exports = {
   getalldrivers,
@@ -123,4 +146,5 @@ module.exports = {
   applyfordriver,
   acceptdriver,
   rejectdriver,
+  getDriversByPlace,
 };
