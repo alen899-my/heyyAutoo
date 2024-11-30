@@ -125,7 +125,10 @@ const getDriversByPlace = async (req, res) => {
   try {
     // Adjust the filtering logic to match your Driver schema
     const drivers = await Driver.find({
-      place: { $regex: new RegExp(`^${from}`, "i") }, // Matches places starting with 'from'
+      $or: [
+        { place: { $regex: new RegExp(`^${from}`, "i") } }, // Match 'from' (case-insensitive, starting with the value)
+        { place: { $regex: new RegExp(`^${to}`, "i") } },   // Match 'to' (case-insensitive, starting with the value)
+      ], // Matches places starting with 'from' or 'to'
     }).populate("userId");
 
     if (!drivers.length) {
@@ -138,6 +141,7 @@ const getDriversByPlace = async (req, res) => {
     res.status(500).send("Server error occurred.");
   }
 };
+
 
 module.exports = {
   getalldrivers,
