@@ -7,10 +7,10 @@
   justify-content: center;
   align-items: center;
   background: linear-gradient(to bottom, var(--light-blue), var(--bold-text-color));
-
 }
 
-.login-container {
+.login-container,
+.register-container {
   flex-direction: column;
   gap: 2rem;
   width: 30%;
@@ -35,15 +35,24 @@
   flex-direction: column;
   gap: 1.5rem;
 }
-.login-container p{
+
+.login-container p,
+.register-container p {
   color: black;
 }
-.login-container button{
+
+.login-container button,
+.register-container button {
   color: black;
 }
-.login-container button:hover{
-  color: black;
+
+.login-container button:hover,
+.register-container button:hover {
   background-color: rgb(231, 190, 56);
+}
+
+.register-container button:hover {
+  background-color: rgb(216, 168, 12);
 }
 
 .form-input,
@@ -73,72 +82,64 @@ input::-webkit-inner-spin-button {
   color: var(--darker-blue);
 }
 
+/* Media Queries for Responsive Design */
 @media (max-width: 1184px) {
-  .login-container {
-    width: 30%;
-  }
+  .login-container,
   .register-container {
     width: 30%;
   }
 }
 
 @media (max-width: 1120px) {
-  .login-container {
-    width: 35%;
-  }
+  .login-container,
   .register-container {
     width: 35%;
   }
 }
 
 @media (max-width: 746px) {
-  .login-container {
-    width: 40%;
-  }
+  .login-container,
   .register-container {
-    width: 40%;
+    width: 50%;
+    padding: 1.5rem;
   }
 }
 
 @media (max-width: 600px) {
-  .login-container {
-    width: 60%;
-  }
+  .login-container,
   .register-container {
-    width: 60%;
+    width: 70%;
+    padding: 1.5rem;
+  }
+
+  .form-heading {
+    font-size: 1.5rem;
+  }
+
+  .form-input {
+    padding: 0.6rem 1rem;
   }
 }
 
 @media (max-width: 408px) {
+  .login-container,
   .register-container {
-    width: 70%;
+    width: 90%;
+    padding: 1rem;
   }
-  .login-container {
-    width: 70%;
-  }
-}
 
-.register-container {
-  flex-direction: column;
-  gap: 2rem;
-  width: 30%;
-  background-color: var(--white);
-  padding: 2rem 3rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-height: fit-content;
-}
-.register-container button{
-  background-color: var(--bold-text-color);
-  color: black;
-}
-.register-container button:hover{
-  background-color: rgb(216, 168, 12);
-  color: black;
-}
-.register-container p{
-  color: black;
+  .form-heading {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .form-input {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
 }
