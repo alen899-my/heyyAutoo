@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
@@ -5,7 +6,7 @@ require("./db/conn");
 const userRouter = require("./routes/userRoutes");
 const driverRouter = require("./routes/driverRoutes");
 const appointRouter = require("./routes/bookingRoutes");
-const path = require("path");
+
 const notificationRouter = require("./routes/notificationRouter");
 
 const app = express();
@@ -18,9 +19,10 @@ app.use("/api/driver", driverRouter);
 app.use("/api/booking", appointRouter);
 app.use("/api/notification", notificationRouter);
 app.use(express.static(path.join(__dirname, "./client/build")));
+app.get("*", (_, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
+  
+})
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
 
 app.listen(port, () => {});

@@ -8,10 +8,10 @@ const client = mongoose
     useNewUrlParser: true,
   })
   .then(() => {
-    console.log("DB connected");
+    
   })
   .catch((error) => {
-    console.log("Error: ", error);
+   
 
     return error;
   });

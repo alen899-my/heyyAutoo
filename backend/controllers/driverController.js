@@ -111,7 +111,7 @@ const deletedriver = async (req, res) => {
     });
     return res.send("Driver deleted successfully");
   } catch (error) {
-    console.log("error", error);
+  
     res.status(500).send("Unable to delete driver");
   }
 };
