@@ -10,7 +10,8 @@
   height: 100vh;
   box-shadow: 0 0 10px 0 var(--darker-blue);
   position: sticky;
-  top: 0%;
+  top: 0;
+  transition: width 0.3s ease-in-out; /* Smooth resizing */
 }
 
 .sidebar-container {
@@ -47,6 +48,7 @@
   cursor: pointer;
 }
 
+/* Responsive styles for medium and small screens */
 @media (max-width: 1126px) {
   .sidebar-section {
     width: 22vw;
@@ -74,5 +76,18 @@
 @media (max-width: 426px) {
   .sidebar-section {
     width: 45vw;
+  }
+}
+
+/* Additional styles for extra small screens */
+@media (max-width: 375px) {
+  .sidebar-section {
+    width: 50vw; /* Shrink sidebar further */
+  }
+
+  .sidebar-container ul > li,
+  .logout-container {
+    font-size: 1rem; /* Reduce text size for readability */
+    gap: 0.8rem;
   }
 }

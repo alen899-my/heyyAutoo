@@ -110,6 +110,7 @@ input::-webkit-inner-spin-button {
   .register-container {
     width: 70%;
     padding: 1.5rem;
+    padding-top: 2rem;
   }
 
   .form-heading {

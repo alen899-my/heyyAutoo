@@ -91,42 +91,41 @@ const Bookings = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {bookings?.map((ele, i) => {
-                    return (
-                      <tr key={ele?._id}>
-                        <td>{i + 1}</td>
-                        <td>
-                          {ele?.driverId?.firstname +
-                            " " +
-                            ele?.driverId?.lastname}
-                        </td>
-                        <td>
-                          {ele?.userId?.firstname + " " + ele?.userId?.lastname}
-                        </td>
-                        <td>{ele?.date}</td>
-                        <td>{ele?.time}</td>
-                        <td>{ele?.createdAt.split("T")[0]}</td>
-                        <td>{ele?.updatedAt.split("T")[1].split(".")[0]}</td>
-                        <td>{ele?.status}</td>
-                        {userId === ele?.driverId?._id ? (
-                          <td>
-                            <button
-                              className={`btn user-btn accept-btn ${
-                                ele?.status === "Completed" ? "disable-btn" : ""
-                              }`}
-                              disabled={ele?.status === "Completed"}
-                              onClick={() => complete(ele)}
-                            >
-                              Complete
-                            </button>
-                          </td>
-                        ) : (
-                          <></>
-                        )}
-                      </tr>
-                    );
-                  })}
-                </tbody>
+  {bookings?.map((ele, i) => {
+    return (
+      <tr key={ele?._id}>
+        <td data-label="S.No">{i + 1}</td>
+        <td data-label="Driver">
+          {ele?.driverId?.firstname + " " + ele?.driverId?.lastname}
+        </td>
+        <td data-label="User">
+          {ele?.userId?.firstname + " " + ele?.userId?.lastname}
+        </td>
+        <td data-label="Booking Date">{ele?.date}</td>
+        <td data-label="Booking Time">{ele?.time}</td>
+        <td data-label="Created At">{ele?.createdAt.split("T")[0]}</td>
+        <td data-label="Updated At">
+          {ele?.updatedAt.split("T")[1].split(".")[0]}
+        </td>
+        <td data-label="Status">{ele?.status}</td>
+        {userId === ele?.driverId?._id && (
+          <td data-label="Action">
+            <button
+              className={`btn user-btn accept-btn ${
+                ele?.status === "Completed" ? "disable-btn" : ""
+              }`}
+              disabled={ele?.status === "Completed"}
+              onClick={() => complete(ele)}
+            >
+              Complete
+            </button>
+          </td>
+        )}
+      </tr>
+    );
+  })}
+</tbody>
+
               </table>
             </div>
           ) : (

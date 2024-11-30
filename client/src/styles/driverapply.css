@@ -2,14 +2,37 @@
 
 .apply-driver-section {
   margin: 0 auto;
-  width: 30%;
+  width: 50%; /* Default width for medium screens */
 }
 
 .apply-driver-container {
+  display: flex; /* Ensure it uses flex layout */
   flex-direction: column;
-  gap: 2rem;
-  width: 100%;
+  gap: 1.5rem; /* Slightly smaller gap */
+  width: 100%; /* Ensures it takes full available width */
 }
+
 option {
   text-transform: capitalize;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .apply-driver-section {
+    width: 70%; /* Increase width for smaller screens */
+  }
+
+  .apply-driver-container {
+    gap: 1rem; /* Reduce the gap between elements */
+  }
+}
+
+@media (max-width: 480px) {
+  .apply-driver-section {
+    width: 90%; /* Take most of the screen width */
+  }
+
+  .apply-driver-container {
+    gap: 0.8rem; /* Further reduce the gap */
+  }
 }

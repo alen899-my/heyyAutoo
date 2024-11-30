@@ -6,33 +6,37 @@ footer {
 
 .footer {
   display: flex;
-  width: 50%;
-  align-items: flex-start;
-  justify-content: space-between;
-  height: 100%;
+  flex-direction: column; /* Default to column layout for small screens */
+  align-items: center; /* Center align items */
+  width: 80%; /* Set a responsive width */
   margin: auto;
   padding: 2rem 0;
+  gap: 2rem; /* Add space between sections */
 }
 
 .footer h3 {
   color: var(--light-blue);
   margin-bottom: 1rem;
   font-size: 1.2rem;
+  text-align: center; /* Center the headings */
 }
 
 .footer a {
   color: var(--light-blue);
+  text-decoration: none;
 }
 
 .footer-links ul {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  text-align: center; /* Center-align links */
 }
 
 .social ul {
   display: flex;
   gap: 1rem;
+  justify-content: center; /* Center the social icons */
 }
 
 .social li {
@@ -81,12 +85,54 @@ footer {
 }
 
 .footer-bottom a {
-  color:black;
+  color: black;
+}
+
+/* Responsive styles for smaller screens */
+@media screen and (max-width: 768px) {
+  .footer {
+    width: 90%; /* Adjust width to fill more space */
+    gap: 1.5rem; /* Reduce gap between sections */
+  }
+
+  .footer-links ul {
+    gap: 0.5rem; /* Reduce gap between links */
+  }
+
+  .social ul {
+    gap: 0.8rem; /* Reduce spacing between social icons */
+  }
+
+  .footer h3 {
+    font-size: 1rem; /* Reduce heading font size */
+  }
+
+  .social li {
+    width: 35px; /* Reduce icon size */
+    height: 35px;
+  }
+
+  .social svg {
+    font-size: 1rem; /* Adjust icon size */
+  }
 }
 
 @media screen and (max-width: 550px) {
-  .social ul {
-    flex-direction: column;
+  .footer {
+    flex-direction: column; /* Stack content vertically */
     align-items: center;
+  }
+
+  .footer-links ul {
+    text-align: center;
+  }
+
+  .social ul {
+    flex-direction: column; /* Stack social icons */
+    align-items: center;
+  }
+
+  .footer-bottom {
+    font-size: 0.9rem; /* Reduce font size */
   }
 }

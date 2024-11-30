@@ -2,45 +2,79 @@
 
 .modal {
   position: absolute;
-  top: 0%;
-  left: 0%;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 99vh;
-  /* background-color: rgba(0, 0, 0, 0.322); */
+  height: 100vh; /* Updated to cover the full viewport height */
   z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center the modal content */
 }
 
 .modal__content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  width: 30%;
-  padding: 2rem;
+  gap: 1.5rem; /* Reduced gap for smaller screens */
+  width: 80%; /* Default width for small screens */
+  max-width: 400px; /* Set a maximum width */
+  padding: 1.5rem;
   border: 1px solid var(--light-blue);
   border-radius: 10px;
   color: var(--light-blue);
   background-color: rgb(30, 55, 90);
   position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for better visibility */
 }
 
 .modal__content h2 {
   color: var(--light-blue);
+  font-size: 1.2rem; /* Smaller font size for responsiveness */
+  text-align: center; /* Center-align for readability */
 }
 
 .modal__content .btn {
-  font-size: 0.9rem;
+  font-size: 0.85rem; /* Adjust button font size */
+  padding: 0.7rem 1.2rem; /* Adjust padding for smaller screens */
 }
 
 .close-btn {
   position: absolute;
-  top: 2%;
+  top: 1%;
   right: 2%;
-  font-size: 1.5rem;
+  font-size: 1.2rem; /* Adjust size for smaller screens */
   color: var(--secondary-color);
   cursor: pointer;
 }
 
 .book {
-  width: 80%;
+  width: 100%; /* Adjust to take full width inside modal */
+  max-width: 300px; /* Set a max width */
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 480px) {
+  .modal__content {
+    width: 90%; /* Take most of the screen width */
+    padding: 1rem; /* Reduce padding */
+    gap: 1rem; /* Reduce gap between elements */
+  }
+
+  .modal__content h2 {
+    font-size: 1rem; /* Smaller header text */
+  }
+
+  .modal__content .btn {
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .close-btn {
+    font-size: 1rem; /* Smaller close button */
+  }
+
+  .book {
+    width: 100%;
+  }
 }
