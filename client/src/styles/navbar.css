@@ -76,6 +76,11 @@ nav {
 }
 
 @media (max-width: 950px) {
+  header {
+    display: flex;
+    justify-content: space-between; /* Keep logo and menu icons aligned */
+    align-items: center; /* Maintain vertical alignment */
+  }
   .nav-links {
     position: fixed;
     top: 0%;
@@ -103,12 +108,22 @@ nav {
     right: 7%;
   }
 }
-@media (max-width:768px){
+@media (max-width: 768px) {
+  .navbar-logo {
+    display: flex;
+    justify-content: flex-start; /* Ensure logo stays on the left */
+    align-items: center; /* Align logo vertically */
+  }
   .navbar-logo .logo-image {
     height: 40px; /* Reduce height for tablets */
   }
 }
 @media (max-width: 480px) {
+  .navbar-logo {
+    display: flex;
+    justify-content: flex-start; /* Ensure logo stays on the left */
+    align-items: center; /* Align logo vertically */
+  }
   .navbar-logo .logo-image {
     height: 40px; /* Further reduce height for mobile screens */
   }
