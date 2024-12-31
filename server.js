@@ -19,13 +19,13 @@ app.use("/api/driver", driverRouter);
 app.use("/api/booking", appointRouter);
 app.use("/api/notification", notificationRouter);
 
-// Serve static files
+
 app.use(express.static(path.join(__dirname, "./client/build")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-// Start the server
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

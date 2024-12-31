@@ -15,9 +15,7 @@ const getuser = async (req, res) => {
 
 const getallusers = async (req, res) => {
   try {
-    const users = await User.find()
-      .find({ _id: { $ne: req.locals } })
-      .select("-password");
+    const users = await User.find({ _id: { $ne: req.locals } }).select("-password");
     return res.send(users);
   } catch (error) {
     res.status(500).send("Unable to get all users");
@@ -30,19 +28,14 @@ const login = async (req, res) => {
     if (!emailPresent) {
       return res.status(400).send("Incorrect credentials");
     }
-    const verifyPass = await bcrypt.compare(
-      req.body.password,
-      emailPresent.password
-    );
+    const verifyPass = await bcrypt.compare(req.body.password, emailPresent.password);
     if (!verifyPass) {
       return res.status(400).send("Incorrect credentials");
     }
     const token = jwt.sign(
       { userId: emailPresent._id, isAdmin: emailPresent.isAdmin },
       process.env.JWT_SECRET,
-      {
-        expiresIn: "2 days",
-      }
+      { expiresIn: "2 days" }
     );
     return res.status(201).send({ msg: "User logged in successfully", token });
   } catch (error) {
@@ -57,7 +50,7 @@ const register = async (req, res) => {
       return res.status(400).send("Email already exists");
     }
     const hashedPass = await bcrypt.hash(req.body.password, 10);
-    const user = await User({ ...req.body, password: hashedPass });
+    const user = new User({ ...req.body, password: hashedPass });
     const result = await user.save();
     if (!result) {
       return res.status(500).send("Unable to register user");
@@ -70,11 +63,11 @@ const register = async (req, res) => {
 
 const updateprofile = async (req, res) => {
   try {
-    const hashedPass = await bcrypt.hash(req.body.password, 10);
-    const result = await User.findByIdAndUpdate(
-      { _id: req.locals },
-      { ...req.body, password: hashedPass }
-    );
+    const updateData = { ...req.body };
+    if (req.body.password) {
+      updateData.password = await bcrypt.hash(req.body.password, 10);
+    }
+    const result = await User.findByIdAndUpdate(req.locals, updateData, { new: true });
     if (!result) {
       return res.status(500).send("Unable to update user");
     }
@@ -86,13 +79,11 @@ const updateprofile = async (req, res) => {
 
 const deleteuser = async (req, res) => {
   try {
-    const result = await User.findByIdAndDelete(req.body.userId);
-    const removeDoc = await Driver.findOneAndDelete({
-      userId: req.body.userId,
-    });
-    const removeAppoint = await Booking.findOneAndDelete({
-      userId: req.body.userId,
-    });
+    const [userResult, driverResult, bookingResult] = await Promise.all([
+      User.findByIdAndDelete(req.body.userId),
+      Driver.findOneAndDelete({ userId: req.body.userId }),
+      Booking.findOneAndDelete({ userId: req.body.userId })
+    ]);
     return res.send("User deleted successfully");
   } catch (error) {
     res.status(500).send("Unable to delete user");

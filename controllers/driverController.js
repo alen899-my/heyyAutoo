@@ -5,17 +5,11 @@ const Booking = require("../models/bookingModel");
 
 const getalldrivers = async (req, res) => {
   try {
-    let docs;
-    if (!req.locals) {
-      docs = await Driver.find({ isDriver: true }).populate("userId");
-    } else {
-      docs = await Driver.find({ isDriver: true })
-        .find({
-          _id: { $ne: req.locals },
-        })
-        .populate("userId");
+    const query = { isDriver: true };
+    if (req.locals) {
+      query._id = { $ne: req.locals };
     }
-
+    const docs = await Driver.find(query).populate("userId");
     return res.send(docs);
   } catch (error) {
     res.status(500).send("Unable to get drivers");
@@ -24,12 +18,8 @@ const getalldrivers = async (req, res) => {
 
 const getnotdrivers = async (req, res) => {
   try {
-    const docs = await Driver.find({ isDriver: false })
-      .find({
-        _id: { $ne: req.locals },
-      })
-      .populate("userId");
-
+    const query = { isDriver: false, _id: { $ne: req.locals } };
+    const docs = await Driver.find(query).populate("userId");
     return res.send(docs);
   } catch (error) {
     res.status(500).send("Unable to get non drivers");
@@ -43,9 +33,8 @@ const applyfordriver = async (req, res) => {
       return res.status(400).send("Application already exists");
     }
 
-    const driver = Driver({ ...req.body.formDetails, userId: req.locals });
-    const result = await driver.save();
-
+    const driver = new Driver({ ...req.body.formDetails, userId: req.locals });
+    await driver.save();
     return res.status(201).send("Application submitted successfully");
   } catch (error) {
     res.status(500).send("Unable to submit application");
@@ -54,22 +43,20 @@ const applyfordriver = async (req, res) => {
 
 const acceptdriver = async (req, res) => {
   try {
-    const user = await User.findOneAndUpdate(
-      { _id: req.body.id },
-      { isDriver: true, status: "accepted" }
-    );
-
-    const driver = await Driver.findOneAndUpdate(
-      { userId: req.body.id },
-      { isDriver: true }
-    );
-
-    const notification = await Notification({
-      userId: req.body.id,
-      content: `Congratulations, Your application has been accepted.`,
-    });
-
-    await notification.save();
+    const [user, driver, notification] = await Promise.all([
+      User.findOneAndUpdate(
+        { _id: req.body.id },
+        { isDriver: true, status: "accepted" }
+      ),
+      Driver.findOneAndUpdate(
+        { userId: req.body.id },
+        { isDriver: true }
+      ),
+      new Notification({
+        userId: req.body.id,
+        content: `Congratulations, Your application has been accepted.`,
+      }).save()
+    ]);
 
     return res.status(201).send("Application accepted notification sent");
   } catch (error) {
@@ -79,18 +66,17 @@ const acceptdriver = async (req, res) => {
 
 const rejectdriver = async (req, res) => {
   try {
-    const details = await User.findOneAndUpdate(
-      { _id: req.body.id },
-      { isDriver: false, status: "rejected" }
-    );
-    const delDoc = await Driver.findOneAndDelete({ userId: req.body.id });
-
-    const notification = await Notification({
-      userId: req.body.id,
-      content: `Sorry, Your application has been rejected.`,
-    });
-
-    await notification.save();
+    const [details, delDoc, notification] = await Promise.all([
+      User.findOneAndUpdate(
+        { _id: req.body.id },
+        { isDriver: false, status: "rejected" }
+      ),
+      Driver.findOneAndDelete({ userId: req.body.id }),
+      new Notification({
+        userId: req.body.id,
+        content: `Sorry, Your application has been rejected.`,
+      }).save()
+    ]);
 
     return res.status(201).send("Application rejection notification sent");
   } catch (error) {
@@ -100,21 +86,17 @@ const rejectdriver = async (req, res) => {
 
 const deletedriver = async (req, res) => {
   try {
-    const result = await User.findByIdAndUpdate(req.body.userId, {
-      isDriver: false,
-    });
-    const removeDoc = await Driver.findOneAndDelete({
-      userId: req.body.userId,
-    });
-    const removeAppoint = await Booking.findOneAndDelete({
-      userId: req.body.userId,
-    });
+    await Promise.all([
+      User.findByIdAndUpdate(req.body.userId, { isDriver: false }),
+      Driver.findOneAndDelete({ userId: req.body.userId }),
+      Booking.findOneAndDelete({ userId: req.body.userId })
+    ]);
     return res.send("Driver deleted successfully");
   } catch (error) {
-  
     res.status(500).send("Unable to delete driver");
   }
 };
+
 const getDriversByPlace = async (req, res) => {
   const { from, to } = req.query;
 
@@ -123,12 +105,11 @@ const getDriversByPlace = async (req, res) => {
   }
 
   try {
-    // Adjust the filtering logic to match your Driver schema
     const drivers = await Driver.find({
       $or: [
-        { place: { $regex: new RegExp(`^${from}`, "i") } }, // Match 'from' (case-insensitive, starting with the value)
-        { place: { $regex: new RegExp(`^${to}`, "i") } },   // Match 'to' (case-insensitive, starting with the value)
-      ], // Matches places starting with 'from' or 'to'
+        { place: { $regex: new RegExp(`^${from}`, "i") } },
+        { place: { $regex: new RegExp(`^${to}`, "i") } },
+      ],
     }).populate("userId");
 
     if (!drivers.length) {
@@ -137,11 +118,9 @@ const getDriversByPlace = async (req, res) => {
 
     res.status(200).send(drivers);
   } catch (error) {
-    console.error("Error fetching drivers:", error);
     res.status(500).send("Server error occurred.");
   }
 };
-
 
 module.exports = {
   getalldrivers,
